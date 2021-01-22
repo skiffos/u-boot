@@ -64,6 +64,7 @@ static inline phys_addr_t map_to_sysmem(const void *ptr)
 #define __raw_readl(a)			__arch_getl(a)
 #define __raw_readq(a)			__arch_getq(a)
 
+#define memset_io(c, v, l)		memset((c), (v), (l))
 /* adding for cadence_qspi_apb.c */
 #define memcpy_fromio(a, c, l)		memcpy((a), (c), (l))
 #define memcpy_toio(c, a, l)		memcpy((c), (a), (l))

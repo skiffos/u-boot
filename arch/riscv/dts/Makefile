@@ -8,6 +8,11 @@ dtb-$(CONFIG_TARGET_SIFIVE_UNLEASHED) += hifive-unleashed-a00.dtb
 dtb-$(CONFIG_TARGET_SIFIVE_UNMATCHED) += hifive-unmatched-a00.dtb
 dtb-$(CONFIG_TARGET_SIPEED_MAIX) += k210-maix-bit.dtb
 
+ifeq ($(CONFIG_TARGET_STARFIVE_VIC7100),y)
+dtb-$(CONFIG_VIC_EVB_V1) += starfive_vic7100_evb.dtb
+dtb-$(CONFIG_VIC_BEAGLE_V) += starfive_vic7100_beagle_v.dtb
+endif
+
 include $(srctree)/scripts/Makefile.dts
 
 targets += $(dtb-y)
