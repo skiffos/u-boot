@@ -203,22 +203,18 @@
 #define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(FF00000))
 
 #elif defined(CONFIG_MACH_SUN8I_V3S) || defined(CONFIG_RISCV)
-/*
- * 64M RAM minus 2MB heap + 16MB for u-boot, stack, fb, etc.
- * 16M uncompressed kernel, 8M compressed kernel, 1M fdt,
- * 1M script, 1M pxe, 1M dt overlay and the ramdisk at the end.
- */
-#define BOOTM_SIZE        __stringify(0x2e00000)
-#ifdef CONFIG_RISCV
+
+// SkiffOS: copy settings from arm64
+#define BOOTM_SIZE        __stringify(0xa000000)
+// #define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(0080000))
 #define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(0040000))
-#else
-#define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(1000000))
-#endif
-#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(1800000))
-#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(1900000))
-#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(1A00000))
-#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(1B00000))
-#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(1C00000))
+#define KERNEL_COMP_ADDR_R __stringify(SDRAM_OFFSET(4000000))
+#define KERNEL_COMP_SIZE  __stringify(0xb000000)
+#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(FA00000))
+#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(FC00000))
+#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(FD00000))
+#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(FE00000))
+#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(FF00000))
 
 #elif defined(CONFIG_MACH_SUNIV)
 /*
@@ -258,17 +254,9 @@
 	"fdtoverlay_addr_r=" FDTOVERLAY_ADDR_R "\0" \
 	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0"
 
-#ifdef CONFIG_ARM64
-
 #define MEM_LAYOUT_ENV_EXTRA_SETTINGS \
 	"kernel_comp_addr_r=" KERNEL_COMP_ADDR_R "\0" \
 	"kernel_comp_size=" KERNEL_COMP_SIZE "\0"
-
-#else
-
-#define MEM_LAYOUT_ENV_EXTRA_SETTINGS ""
-
-#endif
 
 #define DFU_ALT_INFO_RAM \
 	"dfu_alt_info_ram=" \
