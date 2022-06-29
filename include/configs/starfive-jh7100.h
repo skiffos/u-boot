@@ -55,10 +55,19 @@
 
 #include <environment/distro/sf.h>
 
-#define CONFIG_EXTRA_ENV_SETTINGS \
-	"loadaddr=0xa0000000\0" \
-	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
-	BOOTENV
+#define CONFIG_EXTRA_ENV_SETTINGS                                              \
+	"loadaddr=0xa0000000\0"                                                      \
+	"kernel_addr_r=0x84000000\0"                                                 \
+	"fdt_addr_r=0x88000000\0"                                                    \
+	"scriptaddr=0x88100000\0"                                                    \
+	"script_offset_f=0x1fff000\0"                                                \
+	"script_size_f=0x1000\0"                                                     \
+	"pxefile_addr_r=0x88200000\0"                                                \
+	"ramdisk_addr_r=0x88300000\0"                                                \
+	"kernel_comp_addr_r=0x90000000\0"                                            \
+	"kernel_comp_size=0x10000000\0"                                              \
+	BOOTENV \
+	BOOTENV_SF
 
 #define CONFIG_SYS_MAX_FLASH_SECT	0
 #define CONFIG_SYS_MAX_FLASH_BANKS	0
